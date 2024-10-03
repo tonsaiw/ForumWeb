@@ -1,6 +1,6 @@
-import { Header } from "../common/Header";
-import { HeroSection } from "../common/HeroSection";
-import { PostList } from "./PostList";
+import { Header } from "@/components/common/Header";
+import { HeroSection } from "@/components/common/HeroSection";
+import { PostList } from "@/components/forum/PostList";
 
 const Forum = () => {
   return (

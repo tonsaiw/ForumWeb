@@ -1,5 +1,6 @@
-import Forum from "../components/forum/Forum";
+import { redirect } from "next/navigation";
+import "./globals.css";
 
 export default function Home() {
-  return <Forum />;
+  redirect("/forum");
 }

@@ -11,3 +11,9 @@ export interface Post {
     post: Post;
   }
   
+  export interface PostDetailProps {
+    title: string;
+    content: string;
+    author: string;
+    date: string;
+  }
