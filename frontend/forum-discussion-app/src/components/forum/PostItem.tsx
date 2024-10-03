@@ -1,5 +1,5 @@
 import React from "react";
-import { PostProps } from "../types/PostTypes";
+import { PostProps } from "../../types/PostTypes";
 
 export const PostItem: React.FC<PostProps> = ({ post }) => {
   return (
