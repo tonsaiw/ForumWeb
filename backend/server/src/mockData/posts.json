@@ -4,14 +4,15 @@
       "title": "First Post",
       "content": "This is the content of the first post",
       "author": "John Doe",
-      "date": "2024-09-15"
+      "datetime": "2024-10-03 15:45:30"
+
     },
     {
       "id": 2,
       "title": "Second Post",
       "content": "This is the content of the second post",
       "author": "Jane Doe",
-      "date": "2024-10-01"
+      "date": "2024-10-03 15:45:30"
     }
 ]
   
