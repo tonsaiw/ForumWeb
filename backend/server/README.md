@@ -28,6 +28,12 @@
 
 ## Project setup
 
+Run the command to start the database with Docker Compose:
+
+```bash
+docker-compose up
+```
+
 ```bash
 $ npm install
 ```
