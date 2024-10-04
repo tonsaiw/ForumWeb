@@ -1,5 +1,5 @@
 export class CreatePostDto {
-    title: string;
-    content: string;
-    author: string;
+    readonly title: string;
+    readonly content: string;
+    readonly author: string;
 }
