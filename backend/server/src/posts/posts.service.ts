@@ -1,51 +1,43 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
+import { Post, PostDocument } from './schemas/posts.schema';
 import * as postsData from '../mockData/posts.json';
 import {format} from 'date-fns';
 
 @Injectable()
 export class PostsService {
+  constructor(@InjectModel(Post.name) private postModel:Model<PostDocument>) {}
   private posts = postsData;
   private nextId = this.posts.length + 1;
   private formatDate(date: Date): string {
     return format(date, 'yyyy-MM-dd HH:mm:ss');  // Standard SQL format
   }
   
-  create(createPostDto: CreatePostDto) {
-    const newPost = {
-      id: this.nextId,
-      ...createPostDto,
-      date: this.formatDate(new Date()),
-    };
-    this.posts.push(newPost);
-    this.nextId++;
-    return newPost;
+  async create(createPostDto: CreatePostDto): Promise<Post> {
+    const result = new this.postModel(createPostDto);
+    return result.save();
   }
 
-  findAll() {
-    return this.posts;
+  async findAll(): Promise<Post[]> {
+    return this.postModel.find().exec();
   }
 
-  findOne(id: number) {
-    const post = this.posts.find((p) => p.id === id);
-    if (!post) {
-      throw new NotFoundException(`Post with ID ${id} not found`);
+  async findOne(id: string) : Promise<Post> {
+    return this.postModel.findById(id).exec();
+  }
+  async update(id: string, updatePostDto: UpdatePostDto): Promise<Post> {
+    const result = this.postModel.findByIdAndUpdate(id, updatePostDto, {new: true}).exec();
+    return result;
+  }
+
+  async remove(id: string){
+    const result = await this.postModel.findByIdAndDelete(id).exec();
+    if (!result) {
+      throw new NotFoundException(`Post #${id} not found`);
     }
-    return post;
-  }
-  update(id: number, updatePostDto: UpdatePostDto) {
-    const post = this.findOne(id);
-    Object.assign(post, updatePostDto);
-    post.datetime = this.formatDate(new Date());
-    return post;
-  }
-
-  remove(id: number) {
-    const postIndex = this.posts.findIndex((p) => p.id === id);
-    if (postIndex === -1) {
-      throw new NotFoundException(`Post with ID ${id} not found`);
-    }
-    this.posts.splice(postIndex, 1);
+    return {message: `Post #${id} deleted`};
   }
 }
