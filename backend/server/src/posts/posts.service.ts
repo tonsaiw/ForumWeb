@@ -4,20 +4,18 @@ import { Model } from 'mongoose';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { Post, PostDocument } from './schemas/posts.schema';
-import * as postsData from '../mockData/posts.json';
 import {format} from 'date-fns';
 
 @Injectable()
 export class PostsService {
   constructor(@InjectModel(Post.name) private postModel:Model<PostDocument>) {}
-  private posts = postsData;
-  private nextId = this.posts.length + 1;
   private formatDate(date: Date): string {
     return format(date, 'yyyy-MM-dd HH:mm:ss');  // Standard SQL format
   }
   
   async create(createPostDto: CreatePostDto): Promise<Post> {
     const result = new this.postModel(createPostDto);
+    result.created_at = this.formatDate(new Date());
     return result.save();
   }
 

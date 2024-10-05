@@ -5,6 +5,8 @@ import { PostsModule } from './posts/posts.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
+// Set up the ConfigModule and MongooseModule
+
 @Module({
   imports: [ ConfigModule.forRoot({
     isGlobal: true,
