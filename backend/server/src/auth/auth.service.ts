@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { UserService } from 'src/user/user.service';
+import { UserService } from '../user/user.service';
 import * as bcrypt from 'bcrypt';
 import { ValidateUser } from './dto/validateUser.dto';
 import { JwtService } from '@nestjs/jwt';
@@ -14,7 +14,7 @@ export class AuthService {
     // local strategy
     async validateUser(email: string, password: string): Promise<ValidateUser> {
         const user = await this.userService.findByEmail(email);
-
+        // compare password
         if (user && (await bcrypt.compareSync(password, user.password))) {
             const result = user.toObject();
             return {

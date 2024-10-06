@@ -3,6 +3,8 @@ import { PostsController } from './posts.controller';
 import { PostsService } from './posts.service';
 import { getModelToken } from '@nestjs/mongoose';
 import { Post } from './schemas/posts.schema';
+import { JwtAuthGuard } from '../auth/guard/jwt-auth.guard';
+import { CanActivate } from '@nestjs/common';
 
 describe('PostsController', () => {
   let controller: PostsController;
@@ -24,6 +26,10 @@ describe('PostsController', () => {
     save: jest.fn(),
   };
 
+  const mockJwtAuthGuard: CanActivate = {
+    canActivate: jest.fn(() => true), // Always allow access
+  };
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [PostsController],
@@ -37,7 +43,9 @@ describe('PostsController', () => {
           useValue: mockPostModel,
         },
       ],
-    }).compile();
+    }).overrideGuard(JwtAuthGuard) // Override the guard
+    .useValue(mockJwtAuthGuard)
+    .compile();
 
     controller = module.get<PostsController>(PostsController);
     service = module.get<PostsService>(PostsService);
