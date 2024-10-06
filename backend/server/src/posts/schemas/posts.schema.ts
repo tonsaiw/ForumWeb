@@ -15,7 +15,13 @@ export class Post {
   author: string;
 
   @Prop({required: true})
+  createdBy: string;
+
+  @Prop({required: true})
   created_at: string;
+
+  @Prop({required: true})
+  last_updated_at: string;
 }
 
 export const PostSchema = SchemaFactory.createForClass(Post);

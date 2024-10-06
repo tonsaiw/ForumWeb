@@ -8,7 +8,7 @@ describe('PostsService', () => {
 
   // Mock Mongoose model
   const mockPostModel = {
-    create: jest.fn(),
+    // create: jest.fn(),
     find: jest.fn(),
     findById: jest.fn(),
     findByIdAndUpdate: jest.fn(),
