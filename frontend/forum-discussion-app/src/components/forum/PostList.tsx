@@ -2,9 +2,7 @@
 
 import React from "react";
 import { PostItem } from "./PostItem";
-import { posts } from "../../mockData/mockPosts";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { Post } from "../../types/PostTypes";
 import apiClient from "@/app/lib/axios";
 

@@ -1,12 +1,3 @@
-// export interface Post {
-//     id: number;
-//     title: string;
-//     content: string;
-//     author: string;
-//     date: string;
-//     votes: number;
-//   }
-
   export interface Post {
     _id: string;
     title: string;
