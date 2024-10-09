@@ -14,7 +14,7 @@ const PostDetail: React.FC<PostDetailProps> = ({
           <h1 className="text-3xl font-bold mb-4">{title}</h1>
           <p className="text-sm text-gray-400 mb-4">{date}</p>
           <p className="bg-[#d0945d] text-white py-1 px-3 rounded-lg inline-block mb-6">
-            Discussion
+            {author}
           </p>
           <p className="mb-6">{content}</p>
           <p className="font-bold">{author}</p>

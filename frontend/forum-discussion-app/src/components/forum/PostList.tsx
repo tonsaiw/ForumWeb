@@ -24,7 +24,7 @@ export const PostList = () => {
   return (
     <div>
       {data?.map((d: Post) => (
-        <PostItem key={d.id} post={d} />
+        <PostItem key={d._id} post={d} />
       ))}
     </div>
   );
