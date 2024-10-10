@@ -6,6 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { CommentsModule } from './comments/comments.module';
 
 // Set up the ConfigModule and MongooseModule
 
@@ -23,7 +24,7 @@ import { AuthModule } from './auth/auth.module';
         pass: configService.get<string>('MONGO_PASSWORD'),
         dbName: configService.get<string>('MONGO_DB_NAME'),
       }),
-    }), PostsModule, UserModule, AuthModule],
+    }), PostsModule, UserModule, AuthModule, CommentsModule],
   controllers: [AppController],
   providers: [AppService],
 })

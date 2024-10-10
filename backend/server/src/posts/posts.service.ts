@@ -14,9 +14,13 @@ export class PostsService {
   }
   
   async create(createPostDto: CreatePostDto): Promise<Post> {
-    const result = new this.postModel(createPostDto);
-    result.created_at = this.formatDate(new Date());
-    result.last_updated_at = this.formatDate(new Date());
+    const result = new this.postModel(
+      {
+        ...createPostDto,
+        created_at: this.formatDate(new Date()),
+        last_updated_at: this.formatDate(new Date())
+      }
+    );
     return result.save();
   }
 
