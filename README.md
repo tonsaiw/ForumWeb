@@ -34,6 +34,12 @@ Project นี้เป็นโปรเจคที่เตรียมตั
 Run the command to start the database with Docker Compose:
 
 ```bash
+cd backend/server
+```
+
+และ run
+
+```bash
 docker-compose up -d
 ```
 
