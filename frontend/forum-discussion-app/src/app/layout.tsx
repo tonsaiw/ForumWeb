@@ -1,3 +1,4 @@
+import { AuthProvider } from "./context/AuthContext";
 import "./globals.css";
 import { ReactQueryProvider } from "./ReactQueryProvider";
 
@@ -10,7 +11,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ReactQueryProvider>{children}</ReactQueryProvider>
+        <AuthProvider>
+          <ReactQueryProvider>{children}</ReactQueryProvider>
+        </AuthProvider>
       </body>
     </html>
   );
