@@ -20,7 +20,7 @@ export const CommentList: React.FC<CommentListProps> = ({ postId }) => {
   return (
     <div>
       {data?.map((d: Comment) => (
-        <CommentItem key={d._id} comment={d} />
+        <CommentItem key={d._id} postId={postId} comment={d} />
       ))}
     </div>
   );
