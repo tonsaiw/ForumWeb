@@ -1,20 +1,36 @@
+"use client";
 import { Header } from "@/components/common/Header";
 import { HeroSection } from "@/components/common/HeroSection";
+import PostForm from "@/components/forum/PostForm";
 import { PostList } from "@/components/forum/PostList";
-import axios from "axios";
+import Login from "@/components/user/Login";
+import { useState } from "react";
+import { AuthProvider } from "../context/AuthContext";
 
-const AxiosInstance = axios.create({
-  baseURL: process.env.BASE_URL,
-});
 const Forum = () => {
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+
+  const handleToggleLogin = () => {
+    setIsLoginOpen((prev) => !prev); // Toggles the login modal
+  };
+
+  const [isPostFormOpen, setIsPostFormOpen] = useState(false);
+
+  const handleTogglePostForm = () => {
+    setIsPostFormOpen((prev) => !prev); // Toggles the login modal
+  };
   return (
     <div className="min-h-screen bg-[#f7f7f7]">
-      <Header />
-      <HeroSection />
-      <div className="bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto mt-10">
-        <h2 className="text-2xl font-bold mb-4">Latest Discussions</h2>
-        <PostList />
-      </div>
+      <AuthProvider>
+        <Header onLoginClick={handleToggleLogin} />
+        <HeroSection onPostFormClick={handleTogglePostForm} />
+        <div className="bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto mt-10">
+          <h2 className="text-2xl font-bold mb-4">Latest Discussions</h2>
+          <PostList />
+        </div>
+        {isLoginOpen && <Login onClose={handleToggleLogin} />}
+      </AuthProvider>
+      {isPostFormOpen && <PostForm onClose={handleTogglePostForm} />}
     </div>
   );
 };
