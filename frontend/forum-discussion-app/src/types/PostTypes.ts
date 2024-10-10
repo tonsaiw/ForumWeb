@@ -10,6 +10,7 @@
   
   export interface PostProps {
     post: Post;
+    
   }
   
   export interface PostDetailProps {
@@ -17,4 +18,6 @@
     content: string;
     author: string;
     date: string;
+    postId: string;
+    onEditClick: () => void;
   }

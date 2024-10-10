@@ -14,4 +14,5 @@ export interface CommentListProps {
 
 export interface CommentProps {
     comment: Comment;
+    postId: string;
 }
